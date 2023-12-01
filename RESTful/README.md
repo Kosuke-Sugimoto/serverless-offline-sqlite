@@ -5,7 +5,7 @@ serverless-offlineとsqlite3を用いてCRUD命令を処理する簡単なAPIを
 ## 実行環境整備に関するメモ
 ```bash
 npm install 
-npx sls create --template aws-python3 --name [任意のディレクトリ名]
+npx sls create --template aws-python3 -p [任意のディレクトリ名]
 cd [任意のディレクトリ名]
 poetry shell
 ```
