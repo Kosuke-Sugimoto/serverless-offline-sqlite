@@ -1,0 +1,177 @@
+openapi: 3.0.3
+info:
+  title: severless-offline-sqlite
+  description: REST形式のサンプルAPI
+  version: 1.0.0
+  contact:
+    name: Kosuke Sugimoto
+    email: xxx@xxx.com
+servers:
+  - url: 'http://localhost:3000'
+    description: ローカル開発環境
+paths:
+  /users:
+    post:
+      summary: データベースに新しいデータを追加
+      operationId: RegisterSingleUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - age
+              properties:
+                name:
+                  type: string
+                age:
+                  type: integer
+      responses:
+        '200':
+          description: 成功時
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                  body:
+                    type: object
+    get:
+      summary: データベースにある全てのデータを取得
+      operationId: FetchAllUser
+      responses:
+        '200':
+          description: 成功時
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                  body:
+                    type: object
+        '404':
+          description: データベースに1つのデータも登録されていない場合
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                  body:
+                    type: string
+  /users/{user_id}:
+    get:
+      summary: 指定されたidのデータを取得
+      operationId: FetchSingleUser
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema: 
+            type: string
+          description: ユーザーID
+      responses:
+        '200':
+          description: 成功時
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                  body:
+                    type: object
+        '404':
+          description: 指定されたユーザーIDが存在しない場合
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                  body:
+                    type: string
+    put:
+      summary: 指定されたユーザーIDのデータを更新
+      operationId: UpdateSingleUser
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ユーザーID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                age:
+                  type: integer
+      responses:
+        '200':
+          description: 成功時
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode: 
+                    type: integer
+                  body:
+                    type: object
+        '404':
+          description: 指定されたユーザーIDが存在しなかった場合
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                  body:
+                    type: string
+    delete:
+      summary: 指定されたユーザーIDのデータを削除
+      operationId: DeleteSingleUser
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ユーザーID
+      responses:
+        '200':
+          description: 成功時
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                  body:
+                    type: string
+        '404':
+          description: 指定されたユーザーIDが存在しない場合
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                  body:
+                    type: string
