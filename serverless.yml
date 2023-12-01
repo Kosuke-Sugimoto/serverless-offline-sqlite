@@ -1,0 +1,43 @@
+service: sql-offline
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  stage: dev
+  runtime: python3.9
+  region: ap-northeast-1
+
+functions:
+  create:
+    handler: handler.handle_register_single_user
+    events:
+      - httpApi:
+          path: /create
+          method: post
+  read:
+    handler: handler.handle_fetch_single_user
+    events:
+      - httpApi:
+          path: /read/{id}
+          method: get
+  read_all:
+    handler: handler.handle_fetch_all_user
+    events:
+      - httpApi:
+          path: /read
+          method: get
+  update:
+    handler: handler.handle_update_single_user
+    events:
+      - httpApi:
+          path: /update/{id}
+          method: put
+  delete:
+    handler: handler.handle_delete_single_user
+    events:
+      - httpApi:
+          path: /delete/{id}
+          method: delete
+
+plugins:
+  - serverless-offline
