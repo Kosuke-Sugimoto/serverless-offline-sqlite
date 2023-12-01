@@ -1,0 +1,30 @@
+create:
+  handler: handler.handle_register_single_user
+  events:
+    - httpApi:
+        path: /users
+        method: post
+read:
+  handler: handler.handle_fetch_single_user
+  events:
+    - httpApi:
+        path: /users/{id}
+        method: get
+read_all:
+  handler: handler.handle_fetch_all_user
+  events:
+    - httpApi:
+        path: /users
+        method: get
+update:
+  handler: handler.handle_update_single_user
+  events:
+    - httpApi:
+        path: /users/{id}
+        method: put
+delete:
+  handler: handler.handle_delete_single_user
+  events:
+    - httpApi:
+        path: /users/{id}
+        method: delete

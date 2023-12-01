@@ -1,0 +1,13 @@
+service: sql-offline
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  stage: dev
+  runtime: python3.9
+  region: ap-northeast-1
+
+functions: ${file(./configs/functions.yml)}
+
+plugins:
+  - serverless-offline
